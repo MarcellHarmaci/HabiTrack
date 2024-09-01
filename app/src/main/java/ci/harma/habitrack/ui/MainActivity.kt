@@ -1,16 +1,14 @@
 package ci.harma.habitrack.ui
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import ci.harma.habitrack.R
+import ci.harma.habitrack.databinding.ActivityMainBinding
+import ci.harma.habitrack.ui.pages.SectionsPagerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import ci.harma.habitrack.R
-import ci.harma.habitrack.ui.ui.main.SectionsPagerAdapter
-import ci.harma.habitrack.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,13 +20,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = binding.viewPager
-        viewPager.adapter = sectionsPagerAdapter
+        viewPager.adapter = SectionsPagerAdapter(this, supportFragmentManager)
+
         val tabs: TabLayout = binding.tabs
         tabs.setupWithViewPager(viewPager)
-        val fab: FloatingActionButton = binding.fab
 
+        val fab: FloatingActionButton = binding.fab
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)

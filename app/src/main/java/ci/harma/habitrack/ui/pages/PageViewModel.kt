@@ -1,9 +1,8 @@
-package ci.harma.habitrack.ui.ui.main
+package ci.harma.habitrack.ui.pages
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 
 class PageViewModel : ViewModel() {

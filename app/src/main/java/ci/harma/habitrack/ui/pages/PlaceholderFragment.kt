@@ -1,4 +1,4 @@
-package ci.harma.habitrack.ui.ui.main
+package ci.harma.habitrack.ui.pages
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import ci.harma.habitrack.ui.R
 import ci.harma.habitrack.databinding.FragmentMainBinding
 
 /**
