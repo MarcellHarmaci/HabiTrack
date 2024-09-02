@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("org.openapi.generator") version "7.8.0"
 }
 
 android {
@@ -36,10 +37,14 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    sourceSets {
+        getByName("main") {
+            java.srcDir("$buildDir/generated/src/main/kotlin")
+        }
+    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -49,4 +54,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+
+
+// Add the OpenAPI Generator configuration here
+openApiGenerate {
+    inputSpec.set("$rootDir/specs/openapi.yaml")
+    generatorName.set("kotlin")
+    outputDir.set("$buildDir/generated")
+    apiPackage.set("ci.harma.habitrack.api")
+    modelPackage.set("ci.harma.habitrack.model")
+    invokerPackage.set("ci.harma.habitrack.invoker")
 }
