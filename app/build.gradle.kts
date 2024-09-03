@@ -39,7 +39,9 @@ android {
     }
     sourceSets {
         getByName("main") {
-            java.srcDir("$buildDir/generated/src/main/kotlin")
+            val buildDirectory = layout.buildDirectory.get().asFile
+            java.srcDir("$buildDirectory/generated/src/main/kotlin")
+            java.srcDir("$buildDirectory/generated/src/main/java")
         }
     }
 }
@@ -57,13 +59,22 @@ dependencies {
 }
 
 
+val apiSpec = "$rootDir/specs/openapi.yaml"
 
-// Add the OpenAPI Generator configuration here
+// OpenAPI generator configuration
 openApiGenerate {
-    inputSpec.set("$rootDir/specs/openapi.yaml")
-    generatorName.set("kotlin")
-    outputDir.set("$buildDir/generated")
-    apiPackage.set("ci.harma.habitrack.api")
-    modelPackage.set("ci.harma.habitrack.model")
-    invokerPackage.set("ci.harma.habitrack.invoker")
+    inputSpec = apiSpec
+//     TODO experiment with generatorName "android" @see: https://openapi-generator.tech/docs/generators/android/
+//    generatorName = "android"
+    generatorName = "kotlin"
+    outputDir = "${layout.buildDirectory.get().asFile}/generated"
+    val targetPath = "org.openapitools.client"
+    apiPackage = "${targetPath}.api"
+    modelPackage = "${targetPath}.model"
+    invokerPackage = "${targetPath}.invoker"
+}
+
+openApiValidate {
+    inputSpec = apiSpec
+    recommend = true
 }
